@@ -1,0 +1,185 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Hero
+description: Versatile hero component with big and small variants.
+group: Hero
+status: stable
+props:
+  type: object
+  required:
+    - variant
+  properties:
+    variant:
+      type: string
+      title: Variant
+      enum:
+        - big
+        - small
+      meta:enum:
+        big: Big
+        small: Small
+      default: big
+      examples:
+        - big
+
+    heading_text:
+      type: string
+      title: Heading
+      default: "Enter the title"
+      examples:
+        - "Welcome to our website"
+
+    heading_level:
+      type: integer
+      title: Heading level
+      enum: [1, 2, 3, 4, 5, 6]
+      default: 1
+      examples:
+        - 1
+
+    description:
+      type: string
+      title: Description
+      examples:
+        - "A short description text under the title"
+
+    content_align:
+      type: string
+      title: Content alignment
+      enum:
+        - left
+        - center
+        - right
+      meta:enum:
+        left: Left
+        center: Center
+        right: Right
+      default: center
+      examples:
+        - center
+
+    background_color:
+      type: string
+      title: Background color
+      enum:
+        - primary
+        - secondary
+        - foreground
+        - secondary-foreground
+        - accent
+        - muted
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        foreground: Foreground
+        secondary-foreground: Secondary foreground
+        accent: Accent
+        muted: Muted
+      default: primary
+      examples:
+        - primary
+
+    text_color:
+      type: string
+      title: Text color
+      enum:
+        - light
+        - dark
+      meta:enum:
+        light: Light (white text)
+        dark: Dark (default text)
+      default: light
+      examples:
+        - light
+
+    cta_label:
+      type: string
+      title: "CTA 1: Label"
+      examples:
+        - "Learn more"
+
+    cta_href:
+      type: string
+      title: "CTA 1: Link"
+      format: uri-reference
+      examples:
+        - "/contact"
+
+    cta_variant:
+      type: string
+      title: "CTA 1: Style"
+      enum:
+        - primary
+        - secondary
+        - primary-inverted
+        - secondary-inverted
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        primary-inverted: Primary inverted
+        secondary-inverted: Secondary inverted
+      default: primary-inverted
+      examples:
+        - primary-inverted
+
+    cta_icon:
+      type: string
+      title: "CTA 1: Icon"
+      enum:
+        - arrow-right
+        - arrow-left
+        - caret-right
+        - caret-left
+      meta:enum:
+        arrow-right: Arrow right
+        arrow-left: Arrow left
+        caret-right: Caret right
+        caret-left: Caret left
+      default: arrow-right
+      examples:
+        - arrow-right
+
+    cta_2_label:
+      type: string
+      title: "CTA 2: Label"
+      examples:
+        - "Contact us"
+
+    cta_2_href:
+      type: string
+      title: "CTA 2: Link"
+      format: uri-reference
+      examples:
+        - "/about"
+
+    cta_2_variant:
+      type: string
+      title: "CTA 2: Style"
+      enum:
+        - primary
+        - secondary
+        - primary-inverted
+        - secondary-inverted
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        primary-inverted: Primary inverted
+        secondary-inverted: Secondary inverted
+      default: secondary-inverted
+      examples:
+        - secondary-inverted
+
+    cta_2_icon:
+      type: string
+      title: "CTA 2: Icon"
+      enum:
+        - arrow-right
+        - arrow-left
+        - caret-right
+        - caret-left
+      meta:enum:
+        arrow-right: Arrow right
+        arrow-left: Arrow left
+        caret-right: Caret right
+        caret-left: Caret left
+      examples:
+        - arrow-right

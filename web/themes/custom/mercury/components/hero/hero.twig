@@ -1,0 +1,155 @@
+{% set hero_variant = variant|default('big') %}
+{% set hero_text_color = text_color|default('light') %}
+{% set hero_bg_color = background_color|default('primary') %}
+{% set hero_heading_level = heading_level|default(1) %}
+{% set hero_align = content_align|default('center') %}
+
+{# Normalize classes - handle both array and string formats #}
+{% set additional_classes = classes|default('') %}
+{% if additional_classes is iterable %}
+  {% set additional_classes = additional_classes|join(' ') %}
+{% endif %}
+
+{% set hero_variants =
+  html_cva(
+    base: ['relative flex items-center justify-center overflow-hidden'],
+    variants: {
+      variant: {
+        big: ['min-h-[60vh] min-h-[400px] py-16 md:py-20 xl:py-24'],
+        small: ['min-h-[250px] py-12 md:py-14 xl:py-16']
+      },
+      backgroundColor: {
+        primary: 'bg-primary',
+        secondary: 'bg-secondary',
+        foreground: 'bg-foreground',
+        'secondary-foreground': 'bg-secondary-foreground',
+        accent: 'bg-accent',
+        muted: 'bg-muted'
+      }
+    }
+  )
+%}
+
+{% set content_variants =
+  html_cva(
+    base: ['relative z-10 container mx-auto flex flex-col px-4'],
+    variants: {
+      textColor: {
+        light: 'text-white',
+        dark: 'text-foreground'
+      },
+      variant: {
+        big: 'gap-6 md:gap-8',
+        small: 'gap-4 md:gap-5'
+      },
+      align: {
+        left: 'items-start text-left',
+        center: 'items-center text-center',
+        right: 'items-end text-right'
+      }
+    }
+  )
+%}
+
+{% set cta_variants =
+  html_cva(
+    base: ['flex flex-wrap gap-3 mt-2 md:mt-4'],
+    variants: {
+      align: {
+        left: 'justify-start',
+        center: 'justify-center',
+        right: 'justify-end'
+      }
+    }
+  )
+%}
+
+{% set heading_size = hero_variant == 'big' ? 'heading-responsive-6xl' : 'heading-responsive-4xl' %}
+{% set has_cta_1 = cta_label is not empty and cta_href is not empty %}
+{% set has_cta_2 = cta_2_label is not empty and cta_2_href is not empty %}
+
+<section
+  class="{{
+  hero_variants.apply(
+    {
+      variant: hero_variant,
+      backgroundColor: hero_bg_color
+    },
+    additional_classes
+  )
+  }}"
+>
+  {# Content #}
+  <div
+    class="{{
+    content_variants.apply({
+      textColor: hero_text_color,
+      variant: hero_variant,
+      align: hero_align
+    })
+    }}"
+  >
+    {# Heading #}
+    {% if heading_text is not empty %}
+      {{
+        include(
+          'mercury:heading',
+          {
+            heading_text: heading_text,
+            level: hero_heading_level,
+            url: '',
+            text_color: hero_text_color == 'light' ? 'inverted' : 'default',
+            text_size: heading_size,
+            align: hero_align
+          },
+          with_context: false
+        )
+      }}
+    {% endif %}
+
+    {# Description #}
+    {% if description is not empty %}
+      <p class="{{ hero_variant == 'big' ? 'text-lg md:text-xl xl:text-2xl' : 'text-base md:text-lg xl:text-xl' }}">
+        {{ description }}
+      </p>
+    {% endif %}
+
+    {# CTAs #}
+    {% if has_cta_1 or has_cta_2 %}
+      <div class="{{ cta_variants.apply({ align: hero_align }) }}">
+        {% if has_cta_1 %}
+          {{
+            include(
+              '@mercury/components/button/button.twig',
+              {
+                variant: cta_variant|default('primary-inverted'),
+                size: hero_variant == 'big' ? 'large' : 'medium',
+                label: cta_label,
+                href: cta_href,
+                icon: cta_icon|default(''),
+                mobile_width: false
+              },
+              with_context: false
+            )
+          }}
+        {% endif %}
+        {% if has_cta_2 %}
+          {{
+            include(
+              '@mercury/components/button/button.twig',
+              {
+                variant: cta_2_variant|default('secondary-inverted'),
+                size: hero_variant == 'big' ? 'large' : 'medium',
+                label: cta_2_label,
+                href: cta_2_href,
+                icon: cta_2_icon|default(''),
+                mobile_width: false
+              },
+              with_context: false
+            )
+          }}
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
