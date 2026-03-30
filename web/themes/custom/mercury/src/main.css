@@ -82,6 +82,19 @@
   animation: hero-gradient-shift 16s ease infinite;
 }
 
+/* Gradient dinamico: usa --hero-custom-color impostato via inline style */
+.hero-gradient-custom {
+  background: linear-gradient(
+    -45deg,
+    var(--hero-custom-color),
+    color-mix(in srgb, var(--hero-custom-color) 70%, black),
+    var(--hero-custom-color),
+    color-mix(in srgb, var(--hero-custom-color) 60%, white)
+  );
+  background-size: 300% 300%;
+  animation: hero-gradient-shift 16s ease infinite;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

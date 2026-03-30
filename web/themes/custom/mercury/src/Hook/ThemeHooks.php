@@ -123,12 +123,12 @@ final class ThemeHooks {
   /**
    * Node types that render their own hero and manage title/breadcrumb themselves.
    */
-  private const HERO_NODE_TYPES = ['blog_post'];
+  private const HERO_NODE_TYPES = ['blog_post', 'tutorial'];
 
   /**
    * View routes that render their own hero and manage title/breadcrumb themselves.
    */
-  private const HERO_VIEW_ROUTES = ['view.blog.page_2'];
+  private const HERO_VIEW_ROUTES = ['view.blog.page_2', 'view.tutorial.page_1'];
 
   /**
    * Implements template_preprocess_page().
@@ -191,31 +191,60 @@ final class ThemeHooks {
     /** @var \Drupal\node\NodeInterface $node */
     $node = $variables['node'];
 
-    // Pass rendered breadcrumb to node templates that manage their own layout.
+    // Pass rendered breadcrumb and extra variables to node templates that
+    // manage their own hero/layout.
     if (in_array($node->bundle(), self::HERO_NODE_TYPES, TRUE) && $variables['view_mode'] === 'full') {
-      // Build the breadcrumb manually so intermediate category segments (e.g.
-      // /blog/digital-transformation) show the real taxonomy term label rather
-      // than the view's static display title "Blog", which would be deduplicated
-      // by Easy Breadcrumb's remove_repeated_segments setting.
-      $links = [
-        Link::createFromRoute($this->t('Home'), '<front>'),
-        new Link($this->t('Blog'), Url::fromRoute('view.blog.page_2')),
-      ];
-
-      if ($node->hasField('field_blog_post_topics')) {
-        $topics = $node->get('field_blog_post_topics')->referencedEntities();
-        if (!empty($topics)) {
-          /** @var \Drupal\taxonomy\TermInterface $term */
-          $term = reset($topics);
-          $slug = mb_strtolower(str_replace(' ', '-', $term->label()));
-          $links[] = new Link(
-            $term->label(),
-            Url::fromRoute('view.blog.page_2', ['arg_0' => $slug]),
-          );
+      if ($node->bundle() === 'blog_post') {
+        // Blog post: Home > Blog > [Category] > [Title]
+        $links = [
+          Link::createFromRoute($this->t('Home'), '<front>'),
+          new Link($this->t('Blog'), Url::fromRoute('view.blog.page_2')),
+        ];
+        if ($node->hasField('field_blog_post_topics')) {
+          $topics = $node->get('field_blog_post_topics')->referencedEntities();
+          if (!empty($topics)) {
+            /** @var \Drupal\taxonomy\TermInterface $term */
+            $term = reset($topics);
+            $slug = mb_strtolower(str_replace(' ', '-', $term->label()));
+            $links[] = new Link(
+              $term->label(),
+              Url::fromRoute('view.blog.page_2', ['arg_0' => $slug]),
+            );
+          }
         }
+        $links[] = Link::createFromRoute($node->label(), '<none>');
       }
-
-      $links[] = Link::createFromRoute($node->label(), '<none>');
+      elseif ($node->bundle() === 'tutorial') {
+        // Tutorial: Home > Tutorial > [Category] > [Title]
+        $links = [
+          Link::createFromRoute($this->t('Home'), '<front>'),
+          new Link($this->t('Tutorial'), Url::fromRoute('view.tutorial.page_1')),
+        ];
+        if ($node->hasField('field_tutorial_topics')) {
+          $topics = $node->get('field_tutorial_topics')->referencedEntities();
+          if (!empty($topics)) {
+            /** @var \Drupal\taxonomy\TermInterface $term */
+            $term = reset($topics);
+            $slug = mb_strtolower(str_replace(' ', '-', $term->label()));
+            $links[] = new Link(
+              $term->label(),
+              Url::fromRoute('view.tutorial.page_1', ['arg_0' => $slug]),
+            );
+            // Pass the topic hex color to the template so the hero can use it
+            // as dynamic background via --hero-custom-color CSS variable.
+            if ($term->hasField('field_tutorial_topics_color')) {
+              $hex = $term->get('field_tutorial_topics_color')->value;
+              if (!empty($hex)) {
+                $variables['tutorial_topic_color'] = $hex;
+              }
+            }
+          }
+        }
+        $links[] = Link::createFromRoute($node->label(), '<none>');
+      }
+      else {
+        $links = [];
+      }
 
       $breadcrumb = new Breadcrumb();
       $breadcrumb->setLinks($links);
@@ -273,6 +302,46 @@ final class ThemeHooks {
       ];
       $tree = $this->menuLinkTree->transform($tree, $manipulators);
       $variables['blog_menu'] = $this->menuLinkTree->build($tree);
+    }
+
+    if ($view->id() === 'tutorial' && $view->current_display === 'page_1') {
+      // Build breadcrumb — same pattern as blog.page_2: the view display title
+      // is always the static "Tutorial" string so we resolve it manually.
+      $args = $view->args;
+      if (!empty($args[0])) {
+        $slug = $args[0];
+        $term_name_search = str_replace(['-', '_'], ' ', $slug);
+        $terms = $this->entityTypeManager->getStorage('taxonomy_term')
+          ->loadByProperties(['name' => $term_name_search, 'vid' => 'tutorial_topics']);
+        $term_label = !empty($terms)
+          ? reset($terms)->label()
+          : ucwords($term_name_search);
+
+        $breadcrumb = new Breadcrumb();
+        $breadcrumb->setLinks([
+          Link::createFromRoute($this->t('Home'), '<front>'),
+          new Link($this->t('Tutorial'), Url::fromRoute('view.tutorial.page_1')),
+          Link::createFromRoute($term_label, '<none>'),
+        ]);
+        $breadcrumb->addCacheContexts(['url.path']);
+        $variables['page_breadcrumb'] = $breadcrumb->toRenderable();
+      }
+      else {
+        $variables['page_breadcrumb'] = $this->breadcrumb
+          ->build($this->routeMatch)
+          ->toRenderable();
+      }
+
+      // Pass rendered tutorial-menu tree.
+      $parameters = new MenuTreeParameters();
+      $parameters->setMaxDepth(2)->onlyEnabledLinks();
+      $tree = $this->menuLinkTree->load('tutorial-menu', $parameters);
+      $manipulators = [
+        ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+        ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
+      ];
+      $tree = $this->menuLinkTree->transform($tree, $manipulators);
+      $variables['tutorial_menu'] = $this->menuLinkTree->build($tree);
     }
   }
 

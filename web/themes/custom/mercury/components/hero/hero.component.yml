@@ -67,6 +67,7 @@ props:
         - secondary-foreground
         - accent
         - muted
+        - custom
       meta:enum:
         primary: Primary
         secondary: Secondary
@@ -74,9 +75,17 @@ props:
         secondary-foreground: Secondary foreground
         accent: Accent
         muted: Muted
+        custom: Custom (hex via background_color_hex)
       default: primary
       examples:
         - primary
+
+    background_color_hex:
+      type: string
+      title: Background color (hex)
+      description: "Hex color used when background_color is 'custom'. Set via --hero-custom-color CSS variable."
+      examples:
+        - "#378ADD"
 
     text_color:
       type: string

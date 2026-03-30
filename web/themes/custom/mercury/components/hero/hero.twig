@@ -9,7 +9,13 @@
   {% set additional_classes = additional_classes|join(' ') %}
 {% endif %}
 
-{% set hero_bg_color = background_color|default('primary') %}
+{#
+  background_color_hex: hex opzionale (es. '#378ADD') letto da un campo
+  tassonomia. Se presente sovrascrive background_color con una classe
+  hero-gradient-custom che usa la CSS variable --hero-custom-color.
+#}
+{% set has_hex_bg = background_color_hex is not empty %}
+{% set hero_bg_color = has_hex_bg ? 'custom' : background_color|default('primary') %}
 
 {% set hero_variants =
   html_cva(
@@ -25,7 +31,8 @@
         accent: 'hero-gradient-accent',
         muted: 'hero-gradient-muted',
         foreground: 'hero-gradient-foreground',
-        'secondary-foreground': 'hero-gradient-secondary-foreground'
+        'secondary-foreground': 'hero-gradient-secondary-foreground',
+        custom: 'hero-gradient-custom'
       }
     }
   )
@@ -76,6 +83,7 @@
     additional_classes
   )
   }}"
+  {% if has_hex_bg %}style="--hero-custom-color: {{ background_color_hex }};"{% endif %}
 >
 
   {# ── Decorazioni geometriche ────────────────────────────────────── #}
