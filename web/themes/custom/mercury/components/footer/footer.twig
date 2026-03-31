@@ -49,71 +49,8 @@
 
       {# Menu — destra #}
       <div class="grid grid-cols-2 gap-12 md:gap-20">
-        {# Colonna Community #}
-        <div class="flex w-full flex-col gap-5 lg:w-60">
-          <h3 class="text-sm font-bold tracking-widest text-background/50 uppercase">Community</h3>
-          <ul class="flex flex-col gap-3">
-            {% for item in [
-              {
-                label: 'Forum',
-                href: '#'
-              },
-              {
-                label: 'Slack',
-                href: '#'
-              },
-              {
-                label: 'Meetup',
-                href: '#'
-              },
-              {
-                label: 'DrupalCamp',
-                href: '#'
-              },
-              {
-                label: 'Contribuisci',
-                href: '#'
-              }
-            ] %}
-              <li>
-                <a href="{{ item.href }}" class="text-sm text-background/60 transition-colors duration-200 hover:text-background">{{ item.label }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-
-        {# Colonna Risorse #}
-        <div class="flex w-full flex-col gap-5 lg:w-60">
-          <h3 class="text-sm font-bold tracking-widest text-background/50 uppercase">Risorse</h3>
-          <ul class="flex flex-col gap-3">
-            {% for item in [
-              {
-                label: 'Blog',
-                href: '/blog'
-              },
-              {
-                label: 'Tutorial',
-                href: '/tutorial'
-              },
-              {
-                label: 'Documentazione',
-                href: '#'
-              },
-              {
-                label: 'Progetti',
-                href: '#'
-              },
-              {
-                label: 'Moduli consigliati',
-                href: '#'
-              }
-            ] %}
-              <li>
-                <a href="{{ item.href }}" class="text-sm text-background/60 transition-colors duration-200 hover:text-background">{{ item.label }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
+        {{ drupal_menu('footer-1') }}
+        {{ drupal_menu('footer-2') }}
       </div>
     </div>
 
