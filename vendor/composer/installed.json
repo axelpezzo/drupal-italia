@@ -6221,6 +6221,89 @@
             "install-path": "../../web/modules/contrib/project_browser"
         },
         {
+            "name": "drupal/rabbit_hole",
+            "version": "2.0.0-beta2",
+            "version_normalized": "2.0.0.0-beta2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/rabbit_hole.git",
+                "reference": "2.0.0-beta2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/rabbit_hole-2.0.0-beta2.zip",
+                "reference": "2.0.0-beta2",
+                "shasum": "342487411389d7956ab91c9b91459a8cb01320e3"
+            },
+            "require": {
+                "drupal/core": "^9.5 || ^10 || ^11"
+            },
+            "require-dev": {
+                "drupal/commerce_product": "*",
+                "drupal/file_entity": "*",
+                "drupal/group": "*",
+                "drupal/paragraphs-paragraphs_library": "*",
+                "drupal/token": "*",
+                "drupal/tour": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.0-beta2",
+                    "datestamp": "1773704580",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "installation-source": "dist",
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "aleksey.tk",
+                    "homepage": "https://www.drupal.org/user/22093"
+                },
+                {
+                    "name": "bohart",
+                    "homepage": "https://www.drupal.org/user/289861"
+                },
+                {
+                    "name": "dylan donkersgoed",
+                    "homepage": "https://www.drupal.org/user/2803351"
+                },
+                {
+                    "name": "japerry",
+                    "homepage": "https://www.drupal.org/user/45640"
+                },
+                {
+                    "name": "matroskeen",
+                    "homepage": "https://www.drupal.org/user/3426249"
+                },
+                {
+                    "name": "mparker17",
+                    "homepage": "https://www.drupal.org/user/536298"
+                },
+                {
+                    "name": "Odd Hill",
+                    "homepage": "https://www.drupal.org/user/789934"
+                },
+                {
+                    "name": "olofbokedal",
+                    "homepage": "https://www.drupal.org/user/1198438"
+                }
+            ],
+            "description": "Basic functionality that is shared among the different Rabbit Hole modules.",
+            "homepage": "https://www.drupal.org/project/rabbit_hole",
+            "support": {
+                "source": "https://git.drupalcode.org/project/rabbit_hole"
+            },
+            "install-path": "../../web/modules/contrib/rabbit_hole"
+        },
+        {
             "name": "drupal/redirect",
             "version": "1.12.0",
             "version_normalized": "1.12.0.0",

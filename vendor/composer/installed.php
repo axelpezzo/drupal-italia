@@ -937,6 +937,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'drupal/rabbit_hole' => array(
+            'pretty_version' => '2.0.0-beta2',
+            'version' => '2.0.0.0-beta2',
+            'reference' => '2.0.0-beta2',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../web/modules/contrib/rabbit_hole',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'drupal/redirect' => array(
             'pretty_version' => '1.12.0',
             'version' => '1.12.0.0',

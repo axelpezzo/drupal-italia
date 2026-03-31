@@ -11,9 +11,7 @@
   <a href="{{ url }}" class="relative block aspect-[16/9] overflow-hidden" tabindex="-1" aria-hidden="true">
     {% if has_image %}
       {# Immagine del campo #}
-      <div
-        class="absolute inset-0 [&_img]:h-full [&_img]:w-full [&_img]:object-cover [&_img]:transition-transform [&_img]:duration-700 group-hover:[&_img]:scale-110"
-      >
+      <div class="image-cover-container">
         {{ content.field_blog_post_image }}
       </div>
     {% else %}
