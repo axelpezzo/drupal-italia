@@ -6,10 +6,12 @@
  */
 #}
 {% if items %}
+  {% set current_path = path('<current>') %}
   <nav aria-label="Menu blog">
     <ul class="flex flex-col">
       {% for item in items %}
-        {% set is_active = item.in_active_trail %}
+        {% set item_path = item.url.toString %}
+        {% set is_active = item.in_active_trail or item_path == current_path %}
         <li>
           {{
             link(
