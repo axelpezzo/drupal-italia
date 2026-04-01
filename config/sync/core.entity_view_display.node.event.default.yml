@@ -9,12 +9,14 @@ dependencies:
     - field.field.node.event.field_event_image
     - field.field.node.event.field_event_link
     - field.field.node.event.field_event_localtion
+    - field.field.node.event.field_event_metatag
     - field.field.node.event.field_event_type
     - node.type.event
   module:
     - datetime
     - entity_reference_revisions
     - link
+    - metatag
     - user
 id: node.event.default
 targetEntityType: node
@@ -77,6 +79,13 @@ content:
     third_party_settings: {  }
     weight: 104
     region: content
+  field_event_metatag:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 108
+    region: content
   field_event_type:
     type: entity_reference_label
     label: above
@@ -90,5 +99,4 @@ content:
     third_party_settings: {  }
     weight: 100
     region: content
-hidden:
-  langcode: true
+hidden: {  }

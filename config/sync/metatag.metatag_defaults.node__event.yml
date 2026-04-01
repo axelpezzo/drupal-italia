@@ -1,0 +1,10 @@
+uuid: 61677e99-9ebd-4fab-bebf-da45d939f7a1
+langcode: en
+status: true
+dependencies: {  }
+id: node__event
+label: 'Content: Event'
+tags:
+  og_image: '[node:field_event_image]'
+  og_image_alt: '[node:title]'
+  title: '[node:title] | [site:name]'

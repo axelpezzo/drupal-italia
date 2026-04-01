@@ -9,12 +9,14 @@ dependencies:
     - field.field.node.event.field_event_image
     - field.field.node.event.field_event_link
     - field.field.node.event.field_event_localtion
+    - field.field.node.event.field_event_metatag
     - field.field.node.event.field_event_type
     - node.type.event
   module:
     - datetime
     - link
     - media_library
+    - metatag
     - paragraphs
     - path
     - tagify
@@ -82,6 +84,14 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_event_metatag:
+    type: metatag_firehose
+    weight: 26
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
   field_event_type:
     type: tagify_select_widget
     weight: 8
@@ -92,13 +102,6 @@ content:
       placeholder: ''
       show_entity_id: 0
       parent_selection: 1
-    third_party_settings: {  }
-  langcode:
-    type: language_select
-    weight: 2
-    region: content
-    settings:
-      include_locked: true
     third_party_settings: {  }
   path:
     type: path

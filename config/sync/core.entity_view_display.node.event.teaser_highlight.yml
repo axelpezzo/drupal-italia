@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.event.field_event_image
     - field.field.node.event.field_event_link
     - field.field.node.event.field_event_localtion
+    - field.field.node.event.field_event_metatag
     - field.field.node.event.field_event_type
     - node.type.event
   module:
@@ -63,6 +64,6 @@ content:
 hidden:
   field_event_content: true
   field_event_link: true
+  field_event_metatag: true
   field_event_type: true
-  langcode: true
   links: true

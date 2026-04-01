@@ -10,4 +10,5 @@ tags:
   abstract: 'Tutorial, guide e news su Drupal per la community italiana. Rivolto a sviluppatori, aziende e decision maker che vogliono rimanere aggiornati.'
   canonical_url: '[current-page:url]'
   description: 'Tutorial, guide e news su Drupal per la community italiana. Rivolto a sviluppatori, aziende e decision maker che vogliono rimanere aggiornati.'
+  theme_color: '#003eff'
   title: '[site:name] | [site:slogan]'
