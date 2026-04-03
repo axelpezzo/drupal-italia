@@ -16,11 +16,15 @@
       text_color: 'light',
       content_align: 'left',
       heading_level: 1,
-      heading_text: 'Eventi'
+      heading_text: 'Eventi',
+      description: 'Prossimi eventi selezionati per la community italiana di Drupal'
     },
     with_context: false
   )
 }}
+
+{# ── Evento in evidenza ────────────────────────────────────────────── #}
+{{ drupal_view('events', 'block_4') }}
 
 {# ── Breadcrumb ────────────────────────────────────────────────────── #}
 {% if page_breadcrumb is not empty %}
@@ -31,7 +35,6 @@
 
 {# ── Contenuto ─────────────────────────────────────────────────────── #}
 <div class="container mx-auto px-4 py-10 md:py-14">
-
   {% if exposed %}
     <div class="view-filters mb-8">
       {{ exposed }}
@@ -65,5 +68,4 @@
       {{ footer }}
     </div>
   {% endif %}
-
 </div>
