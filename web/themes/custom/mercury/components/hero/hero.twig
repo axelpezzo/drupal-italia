@@ -125,7 +125,7 @@
 
     {# Description #}
     {% if description is not empty %}
-      <p class="{{ hero_variant == 'big' ? 'text-lg md:text-xl xl:text-2xl max-w-2xl' : 'text-base md:text-lg xl:text-xl max-w-xl' }} opacity-90">
+      <p class="{{ hero_variant == 'big' ? 'text-lg md:text-xl xl:text-2xl max-w-2xl' : 'text-base leading-6 md:text-lg md:leading-8 max-w-2xl' }} opacity-90">
         {{ description }}
       </p>
     {% endif %}

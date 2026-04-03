@@ -4,9 +4,9 @@
 {% set has_image = content.field_event_image|render|striptags|trim is not empty %}
 {% set has_type = node.field_event_type.entity is not empty %}
 
-<article class="group flex overflow-hidden bg-card transition-all duration-300 hover:-translate-y-px">
-  {# ── Immagine — sinistra ───────────────────────────────────────── #}
-  <a href="{{ url }}" class="relative w-48 shrink-0 overflow-hidden sm:w-56 md:w-64 lg:w-72" tabindex="-1" aria-hidden="true">
+<article class="group flex flex-col overflow-hidden bg-card transition-all duration-300 hover:-translate-y-px sm:flex-row">
+  {# ── Immagine — sopra su mobile, sinistra da sm ────────────────── #}
+  <a href="{{ url }}" class="relative h-48 w-full shrink-0 overflow-hidden sm:h-auto sm:w-56 md:w-64 lg:w-72" tabindex="-1" aria-hidden="true">
     {% if has_image %}
       <div class="image-cover-container image-cover-container--slow">
         {{ content.field_event_image }}

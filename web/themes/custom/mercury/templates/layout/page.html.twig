@@ -52,12 +52,6 @@
 <div class="layout-container">
   <header role="banner">
     {{ page.header }}
-    {% if not rendered_by_canvas %}
-      <div class="container mx-auto px-4 pb-4">
-        {{ breadcrumb }}
-        {{ title }}
-      </div>
-    {% endif %}
   </header>
 
   {{ page.primary_menu }}
