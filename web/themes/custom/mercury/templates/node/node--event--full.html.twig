@@ -55,7 +55,16 @@
 
       {# Contenuto / descrizione dell'evento #}
       <div class="prose-content flex flex-col gap-8">
-        {{ content|without('field_event_image', 'field_event_date', 'field_event_date_end', 'field_event_localtion', 'field_event_type') }}
+        {{
+          content|without(
+            'field_event_image',
+            'field_event_link',
+            'field_event_date',
+            'field_event_date_end',
+            'field_event_localtion',
+            'field_event_type'
+          )
+        }}
       </div>
     </div>
 

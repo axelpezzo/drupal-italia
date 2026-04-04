@@ -405,15 +405,15 @@
   }
 
   h3 {
-    @apply text-xl font-semibold md:text-2xl;
+    @apply text-xl font-semibold;
   }
 
   h4 {
-    @apply text-lg font-semibold md:text-xl;
+    @apply font-semibold md:text-lg;
   }
 
   h5 {
-    @apply text-lg font-semibold;
+    @apply text-lg;
   }
 
   h1 strong,
@@ -465,7 +465,7 @@
   mask-position: center;
   -webkit-mask-size: contain;
   mask-size: contain;
-  content: '';
+  content: "";
 }
 
 .comp-list--pro ul li {
