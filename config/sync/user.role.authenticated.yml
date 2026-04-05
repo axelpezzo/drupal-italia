@@ -25,6 +25,7 @@ permissions:
   - 'access content'
   - 'access contextual links'
   - 'access navigation'
+  - 'access user profiles'
   - 'bypass honeypot protection'
   - 'delete own files'
   - 'skip CAPTCHA'
