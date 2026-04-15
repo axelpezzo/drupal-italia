@@ -268,11 +268,16 @@ final class ThemeHooks {
         $menu_links = $this->menuLinkManager->loadLinksByRoute($node_route, $node_route_params);
         
         $parent_menu_name = NULL;
-        
+
         if (!empty($menu_links)) {
-          // Get the first menu link (if node appears in multiple menus, use the first one).
-          $menu_link = reset($menu_links);
-          $parent_menu_name = $menu_link->getMenuName();
+          // Skip 'main' menu: it's the default node menu and should never
+          // appear in the sidebar. Use the first non-main menu link instead.
+          foreach ($menu_links as $menu_link) {
+            if ($menu_link->getMenuName() !== 'main') {
+              $parent_menu_name = $menu_link->getMenuName();
+              break;
+            }
+          }
         }
         
         // If we found a parent menu, load and render it.
