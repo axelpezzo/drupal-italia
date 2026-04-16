@@ -191,7 +191,8 @@
                   size: 'medium',
                   label: node.field_event_link.title ?: 'Partecipa',
                   href: node.field_event_link.uri|replace({'internal:': ''}),
-                  icon: 'arrow-right'
+                  icon: 'arrow-right',
+                  target: '_blank'
                 },
                 with_context: false
               )

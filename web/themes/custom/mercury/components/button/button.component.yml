@@ -82,3 +82,8 @@ props:
       examples:
         - false
         - true
+    target:
+      type: string
+      title: Link target
+      examples:
+        - "_blank"

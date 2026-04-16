@@ -73,6 +73,7 @@
     )
     }}"
     {{ disabled_attr }}
+    {% if target %}target="{{ target }}" rel="noopener noreferrer"{% endif %}
   >
     {% if has_icon %}
       <span class="{{ icon_classes }}">
