@@ -181,21 +181,23 @@
         {% endif %}
 
         {# CTA partecipa #}
-        <div class="border-t border-foreground/8 pt-4">
-          {{
-            include(
-              'mercury:button',
-              {
-                variant: 'primary',
-                size: 'medium',
-                label: 'Partecipa',
-                href: url,
-                icon: 'arrow-right'
-              },
-              with_context: false
-            )
-          }}
-        </div>
+        {% if node.field_event_link.uri is not empty %}
+          <div class="border-t border-foreground/8 pt-4">
+            {{
+              include(
+                'mercury:button',
+                {
+                  variant: 'primary',
+                  size: 'medium',
+                  label: node.field_event_link.title ?: 'Partecipa',
+                  href: node.field_event_link.uri|replace({'internal:': ''}),
+                  icon: 'arrow-right'
+                },
+                with_context: false
+              )
+            }}
+          </div>
+        {% endif %}
       </div>
     </div>
 

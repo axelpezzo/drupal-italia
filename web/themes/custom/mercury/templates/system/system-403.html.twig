@@ -1,0 +1,49 @@
+{#
+/**
+ * Template pagina 403 — Accesso negato.
+ */
+#}
+
+{# ── Hero ─────────────────────────────────────────────────────────── #}
+{{
+  include(
+    'mercury:hero',
+    {
+      variant: 'small',
+      background_color: 'foreground',
+      text_color: 'light',
+      content_align: 'left',
+      heading_level: 1,
+      heading_text: '403 — Accesso negato'
+    },
+    with_context: false
+  )
+}}
+
+{# ── Body ─────────────────────────────────────────────────────────── #}
+<div class="container mx-auto px-4 py-16 md:py-24">
+  <div class="mx-auto max-w-2xl text-center">
+    <p class="mb-4 text-6xl font-extrabold text-foreground/10 select-none">403</p>
+    <h2 class="mb-4 text-2xl font-bold text-foreground">
+      Non hai i permessi per accedere
+    </h2>
+    <p class="mb-10 text-lg text-foreground/60">
+      Questa pagina è riservata e non è accessibile con il tuo account attuale.
+      Se pensi che si tratti di un errore, contatta l'amministratore del sito.
+    </p>
+    {{
+      include(
+        'mercury:button',
+        {
+          variant: 'primary',
+          size: 'large',
+          label: 'Torna alla homepage',
+          href: '/',
+          icon: 'arrow-left',
+          icon_first: true
+        },
+        with_context: false
+      )
+    }}
+  </div>
+</div>
